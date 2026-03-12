@@ -29,6 +29,7 @@
                         <th>Date</th>
                         <th>Member</th>
                         <th>Amount</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,13 @@
                         <td>{{ r.created_at.strftime('%d %b %Y') }}</td>
                         <td><b>{{ r.member_name }}</b></td>
                         <td><span class="amount-badge">₹{{ r.amount }}</span></td>
+                        <td>
+                            <form method="POST" action="/delete/{{ r.id }}" onsubmit="return confirm('Are you sure you want to delete this entry?');" style="margin: 0;">
+                                <button type="submit" class="btn-icon" title="Delete">
+                                    <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

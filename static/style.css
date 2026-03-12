@@ -191,6 +191,36 @@ input:focus {
     background: #f1f5f9;
 }
 
+.btn-danger {
+    background: #ef4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.btn-icon:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
 /* Tables */
 .table-container {
     overflow-x: auto;

@@ -95,3 +95,16 @@ async def view_individual(request: Request, member_name: str = "", db: Session =
             "total": total
         }
     )
+
+@app.post("/delete/{collection_id}")
+async def delete_collection(collection_id: int, request: Request, db: Session = Depends(get_db)):
+    record = db.query(models.Collection).filter(models.Collection.id == collection_id).first()
+    if record:
+        db.delete(record)
+        db.commit()
+    
+    # Redirect back to the page the user came from
+    referer = request.headers.get("referer")
+    if referer:
+        return RedirectResponse(url=referer, status_code=303)
+    return RedirectResponse(url="/", status_code=303)
