@@ -6,9 +6,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 # Locally, falls back to SQLite.
 DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./kotaldi_puja.db")
 
-# Neon uses 'postgres://' but SQLAlchemy requires 'postgresql://'
+# Neon uses 'postgres://' prefix; also use psycopg v3 dialect for Python 3.14 compat
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg://", 1)
+elif DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
 
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 
