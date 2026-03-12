@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Kotaldi Puja App{% endblock %}
+
+{% block content %}
+<div class="glass-panel">
+    <h1>Welcome to Kotaldi Puja Collection</h1>
+    <p>A transparent and secure way to manage community contributions.</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="title">Total Collection</span>
+        <span class="value">₹{{ total_amount }}</span>
+    </div>
+    <div class="stat-card">
+        <span class="title">Total Participants</span>
+        <span class="value">{{ total_members }}</span>
+    </div>
+    <div class="stat-card">
+        <span class="title">Total Transactions</span>
+        <span class="value">{{ total_collections }}</span>
+    </div>
+</div>
+
+<div class="glass-panel">
+    <h2>Recent Contributions</h2>
+    {% if recent_collections %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Month</th>
+                    <th>Member</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in recent_collections %}
+                <tr>
+                    <td>{{ r.created_at.strftime('%d %b %Y') }}</td>
+                    <td>{{ r.month }}</td>
+                    <td><b>{{ r.member_name }}</b></td>
+                    <td><span class="amount-badge">₹{{ r.amount }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i data-lucide="inbox" style="width: 48px; height: 48px; opacity: 0.5; margin-bottom: 1rem;"></i>
+        <p>No collections recorded yet.</p>
+        <a href="/add" class="btn btn-primary mt-4" style="width: auto;">Add First Collection</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

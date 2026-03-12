@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Add Collection | Kotaldi Puja App{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="max-width: 600px; margin: 0 auto;">
+    <h2><i data-lucide="plus-circle" style="vertical-align: middle; margin-right: 0.5rem;"></i> Add Collection</h2>
+    <p class="mb-4">Record a new contribution from a member.</p>
+
+    {% if error %}
+    <div class="error-msg">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/add">
+        <div class="form-group">
+            <label for="month">Month & Year</label>
+            <input type="month" id="month" name="month" required>
+            <p style="font-size: 0.75rem; margin-top: 0.25rem;">Select the month this collection is for.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="member_name">Member Name</label>
+            <input type="text" id="member_name" name="member_name" placeholder="e.g., Ram Singh" required>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Contribution Amount (₹)</label>
+            <input type="number" id="amount" name="amount" min="1" placeholder="e.g., 501" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Record Contribution</button>
+    </form>
+</div>
+{% endblock %}
